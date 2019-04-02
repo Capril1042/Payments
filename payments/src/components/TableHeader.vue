@@ -1,34 +1,17 @@
 <template>
-  <div>
-  <table>
-  <TableHeader></TableHeader>
-  <tbody>
-  <tr  v-for="payment in payments" v-bind:key="payment.id">
-    <td>
-      {{ payment.name }}
-    </td>
-    <td>
-    {{ payment.ID}}
-    </td>
-    <td>
-    {{ payment.description }}
-    </td>
-    <td>
-    {{ payment.amount }}
-    </td>
+  <thead>
+    <tr>
+    <th v-for="col in columns" v-bind:key="col">
+      {{ col }}
+      </th>
     </tr>
-    </tbody>
-    </table>
-  </div>
+  </thead>
 </template>
 
 <script>
-import TableHeader from "./TableHeader.vue";
+
 export default {
-  name: "PaymentsList",
-  components:{
-    TableHeader
-  },
+  name: "TableHeader",
   data() {
       return{
         payments: [
@@ -47,6 +30,24 @@ export default {
             },
         ],
       }
+  },
+  computed: {
+      columns: function () {
+          return Object.keys(this.payments[0]);
+      }
+          
+      }
   }
-}
 </script>
+
+<style>
+thead {
+    background: #99ffcc;
+}
+
+tr {
+    text-align: left;
+    padding:5%;
+    font-size: 30px;
+}
+</style>
